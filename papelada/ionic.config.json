@@ -1,0 +1,7 @@
+{
+  "name": "papelada",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
