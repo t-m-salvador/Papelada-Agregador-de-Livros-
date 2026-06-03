@@ -1,2 +1,54 @@
 // For information on how to create your own theme, please refer to:
 // https://ionicframework.com/docs/theming/
+// Papelada — Custom Theme Variables
+// Paleta: castanho/bege dos mockups
+ 
+:root {
+  // Cor primária — castanho
+  --ion-color-primary: #8B4513;
+  --ion-color-primary-rgb: 139, 69, 19;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #7a3d11;
+  --ion-color-primary-tint: #97582b;
+ 
+  // Cor secundária — bege claro
+  --ion-color-secondary: #D4A96A;
+  --ion-color-secondary-rgb: 212, 169, 106;
+  --ion-color-secondary-contrast: #000000;
+  --ion-color-secondary-contrast-rgb: 0, 0, 0;
+  --ion-color-secondary-shade: #bb955d;
+  --ion-color-secondary-tint: #d8b279;
+ 
+  // Fundo geral — bege muito claro
+  --ion-background-color: #FAF6F0;
+  --ion-background-color-rgb: 250, 246, 240;
+ 
+  // Toolbar
+  --ion-toolbar-background: #8B4513;
+  --ion-toolbar-color: #ffffff;
+ 
+  // Tab bar
+  --ion-tab-bar-background: #FAF6F0;
+  --ion-tab-bar-color: #8B4513;
+  --ion-tab-bar-color-selected: #8B4513;
+ 
+  // Cards / items
+  --papelada-card-bg: #F0E8DC;
+  --papelada-border-radius: 12px;
+ 
+  // Texto
+  --ion-text-color: #2C1A0E;
+  --ion-text-color-rgb: 44, 26, 14;
+ 
+  // Pesquisa
+  --ion-color-step-100: #F0E8DC;
+}
+ 
+// Cor de destaque para estrelas
+.star-filled {
+  color: #D4A96A;
+}
+.star-empty {
+  color: #C9B99A;
+}
