@@ -1,0 +1,89 @@
+[
+  {
+    "id": 1,
+    "titulo": "1984",
+    "autores": "George Orwell",
+    "genero": "Ficção Científica",
+    "tags": ["Distopia", "Política"],
+    "capa": "assets/images/1984.jpg",
+    "descricao": "Uma visão distópica de um futuro totalitário onde o Partido controla tudo.",
+    "avaliacao": 4.8,
+    "numAvaliacoes": 312,
+    "opinioes": [
+      {
+        "id": 1,
+        "utilizador": "Rosário Alves",
+        "avatar": "",
+        "texto": "Neste volume, o grupo larga a zona de conforto e vai explorar as tripas e as ladeiras da Invicta. O Enredo: Tudo começa com uma viagem de comboio e, como não podia deixar de ser, o grupo envolve-se numa teia de mistério.",
+        "data": "2025-03-10"
+      },
+      {
+        "id": 2,
+        "utilizador": "Rua dos Livros",
+        "avatar": "",
+        "texto": "Mais uma obra literária incontornável que nos faz refletir sobre a sociedade atual.",
+        "data": "2025-02-20"
+      },
+      {
+        "id": 3,
+        "utilizador": "Clube dos 5",
+        "avatar": "",
+        "texto": "Este livro destaca-se pela sua narrativa intensa e pela forma como retrata o controlo social.",
+        "data": "2025-01-15"
+      }
+    ],
+    "livrosSimilares": [2]
+  },
+  {
+    "id": 2,
+    "titulo": "Admirável Mundo Novo",
+    "autores": "Aldous Huxley",
+    "genero": "Ficção Científica",
+    "tags": ["Distopia", "Sociedade"],
+    "capa": "assets/images/admiravel.jpg",
+    "descricao": "Uma sociedade futurista onde os seres humanos são produzidos em série e condicionados.",
+    "avaliacao": 4.5,
+    "numAvaliacoes": 198,
+    "opinioes": [],
+    "livrosSimilares": [1]
+  },
+  {
+    "id": 3,
+    "titulo": "Ensaio sobre a Cegueira",
+    "autores": "José Saramago",
+    "genero": "Romance",
+    "tags": ["Sociedade", "Portugal"],
+    "capa": "assets/images/cegueira.jpg",
+    "descricao": "Uma epidemia de cegueira branca afeta uma cidade inteira, revelando o lado mais sombrio da humanidade.",
+    "avaliacao": 4.7,
+    "numAvaliacoes": 245,
+    "opinioes": [],
+    "livrosSimilares": []
+  },
+  {
+    "id": 4,
+    "titulo": "Uma Aventura no Porto",
+    "autores": "A. Magalhães, I.Alçada",
+    "genero": "Aventura",
+    "tags": ["Juvenil", "Portugal"],
+    "capa": "assets/images/aventura_porto.jpg",
+    "descricao": "O grupo Teresa, Luísa, Pedro, Chico e João vai explorar as tripas e ladeiras da Invicta.",
+    "avaliacao": 4.2,
+    "numAvaliacoes": 87,
+    "opinioes": [],
+    "livrosSimilares": [5]
+  },
+  {
+    "id": 5,
+    "titulo": "Uma Aventura na Cidade",
+    "autores": "A. Magalhães, I.Alçada",
+    "genero": "Aventura",
+    "tags": ["Juvenil", "Portugal"],
+    "capa": "assets/images/aventura_cidade.jpg",
+    "descricao": "Mais uma aventura do grupo de amigos pelas ruas da cidade.",
+    "avaliacao": 4.0,
+    "numAvaliacoes": 65,
+    "opinioes": [],
+    "livrosSimilares": [4]
+  }
+]
