@@ -4,91 +4,77 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding" @if="!livroAdicionado">
+@if (!livroAdicionado) {
+  <ion-content class="ion-padding">
 
-  <!-- Área da fotografia da capa -->
-  <div class="capa-upload" (click)="tirarFotografia()">
-    <ion-img
-      @if="capaPreview"
-      [src]="capaPreview"
-      class="capa-preview">
-    </ion-img>
-    <div @if="!capaPreview" class="capa-placeholder">
-      <ion-icon name="camera-outline" class="icon-camera"></ion-icon>
-      <p>Toque para fotografar a capa</p>
+    <!-- Área da fotografia da capa -->
+    <div class="capa-upload" (click)="tirarFotografia()">
+      @if (capaPreview) {
+        <ion-img [src]="capaPreview" class="capa-preview"></ion-img>
+      } @else {
+        <div class="capa-placeholder">
+          <ion-icon name="camera-outline" class="icon-camera"></ion-icon>
+          <p>Toque para fotografar a capa</p>
+        </div>
+      }
     </div>
-  </div>
 
-  <!-- Formulário com Reactive Forms -->
-  <form [formGroup]="livroForm">
+    <form [formGroup]="livroForm">
 
-    <!-- Campo: Nome -->
-    <ion-item class="campo-form">
-      <ion-label position="stacked">Nome:</ion-label>
-      <ion-input
-        formControlName="titulo"
-        placeholder="Título do livro"
-        type="text">
-      </ion-input>
-    </ion-item>
-    <p class="erro-campo" @if="campoInvalido('titulo')">
-      O título é obrigatório.
-    </p>
+      <ion-item class="campo-form">
+        <ion-label position="stacked">Nome:</ion-label>
+        <ion-input formControlName="titulo" placeholder="Título do livro" type="text"></ion-input>
+      </ion-item>
+      @if (campoInvalido('titulo')) {
+        <p class="erro-campo">O título é obrigatório.</p>
+      }
 
-    <!-- Campo: Autores -->
-    <ion-item class="campo-form">
-      <ion-label position="stacked">Autores:</ion-label>
-      <ion-input
-        formControlName="autores"
-        placeholder="Nome do(s) autor(es)"
-        type="text">
-      </ion-input>
-    </ion-item>
-    <p class="erro-campo" @if="campoInvalido('autores')">
-      O autor é obrigatório.
-    </p>
+      <ion-item class="campo-form">
+        <ion-label position="stacked">Autores:</ion-label>
+        <ion-input formControlName="autores" placeholder="Nome do(s) autor(es)" type="text"></ion-input>
+      </ion-item>
+      @if (campoInvalido('autores')) {
+        <p class="erro-campo">O autor é obrigatório.</p>
+      }
 
-    <!-- Campo: Género (dropdown) -->
-    <ion-item class="campo-form">
-      <ion-label position="stacked">Género:</ion-label>
-      <ion-select formControlName="genero" placeholder="Seleciona um género">
-        <ion-select-option @for="let g of generos" [value]="g">{{ g }}</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <p class="erro-campo" @if="campoInvalido('genero')">
-      O género é obrigatório.
-    </p>
+      <ion-item class="campo-form">
+        <ion-label position="stacked">Género:</ion-label>
+        <ion-select formControlName="genero" placeholder="Seleciona um género">
+          @for (g of generos; track g) {
+            <ion-select-option [value]="g">{{ g }}</ion-select-option>
+          }
+        </ion-select>
+      </ion-item>
+      @if (campoInvalido('genero')) {
+        <p class="erro-campo">O género é obrigatório.</p>
+      }
 
-    <!-- Campo: Tag / Tema -->
-    <ion-item class="campo-form">
-      <ion-label position="stacked">Tag (tema):</ion-label>
-      <ion-input
-        formControlName="tag"
-        placeholder="Ex: Século XX, Ficção, ..."
-        type="text">
-      </ion-input>
-    </ion-item>
+      <ion-item class="campo-form">
+        <ion-label position="stacked">Tag (tema):</ion-label>
+        <ion-input formControlName="tag" placeholder="Ex: Século XX, Ficção, ..." type="text"></ion-input>
+      </ion-item>
 
-    <!-- Botão Adicionar -->
-    <ion-button
-      expand="block"
-      color="primary"
-      class="btn-adicionar"
-      (click)="adicionarLivro()"
-      [disabled]="livroForm.invalid">
-      Adicionar
-    </ion-button>
+      <ion-button
+        expand="block"
+        color="primary"
+        class="btn-adicionar"
+        (click)="adicionarLivro()"
+        [disabled]="livroForm.invalid">
+        Adicionar
+      </ion-button>
 
-  </form>
+    </form>
 
-</ion-content>
+  </ion-content>
+}
 
-<!-- Ecrã de confirmação após adicionar (Tarefa 2) -->
-<ion-content @if="livroAdicionado" class="conteudo-confirmacao">
-  <div class="confirmacao-container">
-    <div class="circulo-confirmacao">
-      <ion-icon name="checkmark-outline" class="icon-check"></ion-icon>
+@if (livroAdicionado) {
+  <ion-content class="conteudo-confirmacao">
+    <div class="confirmacao-container">
+      <div class="circulo-confirmacao">
+        <ion-icon name="checkmark-outline" class="icon-check"></ion-icon>
+      </div>
+      <h2>Adicionado</h2>
     </div>
-    <h2>Adicionado</h2>
-  </div>
-</ion-content>
+  </ion-content>
+}

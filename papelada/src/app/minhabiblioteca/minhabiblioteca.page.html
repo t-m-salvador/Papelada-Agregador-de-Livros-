@@ -1,30 +1,31 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button @if="filtroAtivo" (click)="limparFiltro()" text=""></ion-back-button>
+      @if (filtroAtivo) {
+        <ion-back-button (click)="limparFiltro()" text=""></ion-back-button>
+      }
     </ion-buttons>
     <ion-title>{{ filtroAtivo || 'Minha Biblioteca' }}</ion-title>
     <ion-buttons slot="end">
-      <!-- Toggle entre grelha e lista -->
       <ion-button (click)="toggleVista()">
         <ion-icon slot="icon-only" [name]="vistaGrelha ? 'list-outline' : 'grid-outline'"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 
-  <!-- Filtros por género -->
   <ion-toolbar color="primary">
-    <ion-segment [(ngModel)]="generoSelecionado" (ionChange)="filtrarPorGenero()" scrollable>
+    <ion-segment [(ngModel)]="generoSelecionado" (ionChange)="filtrarPorGenero()" scrollable="true">
       <ion-segment-button value="">
         <ion-label>Todos</ion-label>
       </ion-segment-button>
-      <ion-segment-button @for="let g of generos" [value]="g">
-        <ion-label>{{ g }}</ion-label>
-      </ion-segment-button>
+      @for (g of generos; track g) {
+        <ion-segment-button [value]="g">
+          <ion-label>{{ g }}</ion-label>
+        </ion-segment-button>
+      }
     </ion-segment>
   </ion-toolbar>
 
-  <!-- Ordenação -->
   <ion-toolbar>
     <ion-item lines="none" class="item-ordenacao">
       <ion-icon name="swap-vertical-outline" slot="start" color="primary"></ion-icon>
@@ -43,45 +44,45 @@
 
 <ion-content>
 
-  <!-- Vista em grelha -->
-  <div @if="vistaGrelha" class="grelha-livros">
-    <div
-      @for="let livro of livrosFiltrados"
-      class="card-grelha"
-      (click)="abrirLivro(livro.id)">
-      <ion-img
-        [src]="livro.capa"
-        onerror="this.src='assets/icon/favicon.png'"
-        class="capa-grelha">
-      </ion-img>
-      <p class="titulo-grelha">{{ livro.titulo | slice:0:18 }}...</p>
-      <p class="autor-grelha">{{ livro.autores | slice:0:16 }}...</p>
+  @if (vistaGrelha) {
+    <div class="grelha-livros">
+      @for (item of livrosFiltrados; track item.id) {
+        <div class="card-grelha" (click)="abrirLivro(item.id)">
+          <ion-img
+            [src]="item.capa"
+            onerror="this.src='assets/icon/favicon.png'"
+            class="capa-grelha">
+          </ion-img>
+          <p class="titulo-grelha">{{ item.titulo }}</p>
+          <p class="autor-grelha">{{ item.autores }}</p>
+        </div>
+      } @empty {
+        <div class="sem-livros">
+          <ion-icon name="book-outline"></ion-icon>
+          <p>Nenhum livro encontrado.</p>
+        </div>
+      }
     </div>
-  </div>
-
-  <!-- Vista em lista -->
-  <ion-list @if="!vistaGrelha" lines="none">
-    <ion-item
-      @for="let livro of livrosFiltrados"
-      button
-      detail="true"
-      class="item-lista"
-      (click)="abrirLivro(livro.id)">
-      <ion-avatar slot="start" class="avatar-lista">
-        <ion-img [src]="livro.capa" onerror="this.src='assets/icon/favicon.png'"></ion-img>
-      </ion-avatar>
-      <ion-label>
-        <h2>{{ livro.titulo }}</h2>
-        <p>{{ livro.autores }}</p>
-        <ion-badge color="secondary">{{ livro.avaliacao }} ★</ion-badge>
-      </ion-label>
-    </ion-item>
-  </ion-list>
-
-  <!-- Mensagem sem livros -->
-  <div @if="livrosFiltrados.length === 0" class="sem-livros">
-    <ion-icon name="book-outline"></ion-icon>
-    <p>Nenhum livro encontrado.</p>
-  </div>
+  } @else {
+    <ion-list lines="none">
+      @for (item of livrosFiltrados; track item.id) {
+        <ion-item button detail="true" class="item-lista" (click)="abrirLivro(item.id)">
+          <ion-avatar slot="start" class="avatar-lista">
+            <ion-img [src]="item.capa" onerror="this.src='assets/icon/favicon.png'"></ion-img>
+          </ion-avatar>
+          <ion-label>
+            <h2>{{ item.titulo }}</h2>
+            <p>{{ item.autores }}</p>
+            <ion-badge color="secondary">{{ item.avaliacao }} ★</ion-badge>
+          </ion-label>
+        </ion-item>
+      } @empty {
+        <div class="sem-livros">
+          <ion-icon name="book-outline"></ion-icon>
+          <p>Nenhum livro encontrado.</p>
+        </div>
+      }
+    </ion-list>
+  }
 
 </ion-content>

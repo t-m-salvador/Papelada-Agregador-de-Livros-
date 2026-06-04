@@ -60,9 +60,9 @@ export class MeuPerfilPage implements OnInit {
         { text: 'Cancelar', role: 'cancel' },
         {
           text: 'Confirmar',
-          handler: (dados) => {
+          handler: async (dados: any) => {
             if (dados.email) {
-              this.utilizadorService.atualizarPerfil({ email: dados.email });
+              await this.utilizadorService.atualizarPerfil({ email: dados.email });
             }
           }
         }
@@ -83,8 +83,8 @@ export class MeuPerfilPage implements OnInit {
         {
           text: 'Apagar',
           role: 'destructive',
-          handler: () => {
-            this.utilizadorService.apagarConta();
+          handler: async () => {
+            await this.utilizadorService.apagarConta();
             this.router.navigate(['/tabs/home']);
           }
         }

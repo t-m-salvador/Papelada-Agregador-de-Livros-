@@ -1,5 +1,4 @@
 <ion-header>
-  <!-- Toolbar principal com barra de pesquisa -->
   <ion-toolbar color="primary">
     <ion-searchbar
       [(ngModel)]="termoPesquisa"
@@ -13,33 +12,28 @@
 
 <ion-content>
 
-  <!-- Resultados de pesquisa (mostrado quando há termo de pesquisa) -->
-  <div @if="termoPesquisa.length > 0">
+  @if (termoPesquisa.length > 0) {
     <ion-list>
-      <ion-item
-        @for="let livro of resultadosPesquisa"
-        button
-        detail="false"
-        (click)="abrirLivro(livro.id)">
-        <ion-avatar slot="start">
-          <ion-img [src]="livro.capa" onerror="this.src='assets/icon/favicon.png'"></ion-img>
-        </ion-avatar>
-        <ion-label>
-          <h2>{{ livro.titulo }}</h2>
-          <p>{{ livro.autores }}</p>
-        </ion-label>
-        <ion-badge slot="end" color="secondary">{{ livro.avaliacao }}</ion-badge>
-      </ion-item>
-      <ion-item @if="resultadosPesquisa.length === 0">
-        <ion-label class="ion-text-center">
-          <p>Nenhum resultado encontrado</p>
-        </ion-label>
-      </ion-item>
+      @for (livro of resultadosPesquisa; track livro.id) {
+        <ion-item button detail="false" (click)="abrirLivro(livro.id)">
+          <ion-avatar slot="start">
+            <ion-img [src]="livro.capa" onerror="this.src='assets/icon/favicon.png'"></ion-img>
+          </ion-avatar>
+          <ion-label>
+            <h2>{{ livro.titulo }}</h2>
+            <p>{{ livro.autores }}</p>
+          </ion-label>
+          <ion-badge slot="end" color="secondary">{{ livro.avaliacao }}</ion-badge>
+        </ion-item>
+      } @empty {
+        <ion-item>
+          <ion-label class="ion-text-center">
+            <p>Nenhum resultado encontrado</p>
+          </ion-label>
+        </ion-item>
+      }
     </ion-list>
-  </div>
-
-  <!-- Conteúdo principal (escondido durante pesquisa) -->
-  <div @if="termoPesquisa.length === 0">
+  } @else {
 
     <!-- Secção "Em Alta" -->
     <div class="secao-header">
@@ -48,11 +42,13 @@
     </div>
 
     <div class="slides-livros">
-      <div class="card-livro" @for="let livro of livrosEmAlta" (click)="abrirLivro(livro.id)">
-        <ion-img [src]="livro.capa" onerror="this.src='assets/icon/favicon.png'" class="capa-livro"></ion-img>
-        <p class="titulo-livro">{{ livro.titulo }}</p>
-        <p class="autor-livro">{{ livro.autores }}</p>
-      </div>
+      @for (livro of livrosEmAlta; track livro.id) {
+        <div class="card-livro" (click)="abrirLivro(livro.id)">
+          <ion-img [src]="livro.capa" onerror="this.src='assets/icon/favicon.png'" class="capa-livro"></ion-img>
+          <p class="titulo-livro">{{ livro.titulo }}</p>
+          <p class="autor-livro">{{ livro.autores }}</p>
+        </div>
+      }
     </div>
 
     <!-- Secção "Opiniões Recentes" -->
@@ -61,23 +57,26 @@
     </div>
 
     <ion-list lines="none" class="lista-opinioes">
-      <ion-item
-        @for="let opiniao of opinioesPaginadas"
-        class="item-opiniao"
-        button
-        detail="false"
-        (click)="abrirOpiniao(opiniao)">
-        <ion-avatar slot="start" class="avatar-opiniao">
-          <ion-icon name="person-circle-outline" class="icon-avatar"></ion-icon>
-        </ion-avatar>
-        <ion-label>
-          <h3>{{ opiniao.utilizador }}</h3>
-          <p>{{ opiniao.texto | slice:0:40 }}...</p>
-        </ion-label>
-        <ion-icon name="chevron-down-outline" slot="end"></ion-icon>
-      </ion-item>
+      @for (opiniao of opinioesPaginadas; track opiniao.id) {
+        <ion-item class="item-opiniao" button detail="false" (click)="abrirOpiniao(opiniao)">
+          <ion-avatar slot="start" class="avatar-opiniao">
+            <ion-icon name="person-circle-outline" class="icon-avatar"></ion-icon>
+          </ion-avatar>
+          <ion-label>
+            <h3>{{ opiniao.utilizador }}</h3>
+            <p>{{ opiniao.texto | slice:0:40 }}...</p>
+          </ion-label>
+          <ion-icon name="chevron-down-outline" slot="end"></ion-icon>
+        </ion-item>
+      } @empty {
+        <ion-item>
+          <ion-label class="ion-text-center">
+            <p>Ainda não há opiniões.</p>
+          </ion-label>
+        </ion-item>
+      }
     </ion-list>
 
-  </div>
+  }
 
 </ion-content>

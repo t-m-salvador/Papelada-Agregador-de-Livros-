@@ -55,7 +55,7 @@ export class EditarPerfilPage implements OnInit {
     }
 
     const { nome, email } = this.perfilForm.value;
-    this.utilizadorService.atualizarPerfil({ nome, email });
+    await this.utilizadorService.atualizarPerfil({ nome, email });
 
     const toast = await this.toastCtrl.create({
       message: 'Perfil atualizado com sucesso!',

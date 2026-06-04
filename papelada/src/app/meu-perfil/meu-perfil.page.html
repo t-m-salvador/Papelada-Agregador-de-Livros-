@@ -6,7 +6,6 @@
 
 <ion-content>
 
-  <!-- Avatar e nome -->
   <div class="perfil-topo">
     <div class="avatar-container">
       <ion-icon name="person-circle-outline" class="avatar-icon"></ion-icon>
@@ -15,37 +14,19 @@
     <div class="divisor"></div>
   </div>
 
-  <!-- Informações do perfil -->
   <div class="info-container">
     <p><strong>Membro desde:</strong> {{ utilizador?.membroDesde }}</p>
     <p><strong>Email:</strong> {{ utilizador?.email }}</p>
   </div>
 
-  <!-- Botões de ação -->
   <div class="botoes-container">
-    <ion-button
-      expand="block"
-      fill="outline"
-      color="primary"
-      class="btn-perfil"
-      (click)="editarInformacoes()">
+    <ion-button expand="block" fill="outline" color="primary" class="btn-perfil" (click)="editarInformacoes()">
       Alterar Informações
     </ion-button>
-
-    <ion-button
-      expand="block"
-      fill="outline"
-      color="primary"
-      class="btn-perfil"
-      (click)="alterarAutenticacao()">
+    <ion-button expand="block" fill="outline" color="primary" class="btn-perfil" (click)="alterarAutenticacao()">
       Alterar Informações de Autenticação
     </ion-button>
-
-    <ion-button
-      expand="block"
-      color="danger"
-      class="btn-apagar"
-      (click)="confirmarApagar()">
+    <ion-button expand="block" color="danger" class="btn-apagar" (click)="confirmarApagar()">
       Apagar Conta
     </ion-button>
   </div>

@@ -88,17 +88,16 @@ export class AdicionarLivroPage implements OnInit {
    * Adiciona o livro ao catálogo e mostra o ecrã de confirmação.
    * Só executa se o formulário for válido.
    */
-  adicionarLivro() {
+  async adicionarLivro() {
     if (this.livroForm.invalid) {
-      // Marcar todos os campos como tocados para mostrar erros
       this.livroForm.markAllAsTouched();
       return;
     }
 
     const { titulo, autores, genero, tag } = this.livroForm.value;
 
-    // Adicionar o livro através do service
-    this.livrosService.adicionarLivro({
+    // Adicionar o livro através do service e guardar no Ionic Storage
+    await this.livrosService.adicionarLivro({
       titulo,
       autores,
       genero,

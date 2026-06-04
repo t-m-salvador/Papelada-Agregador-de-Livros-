@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Storage } from '@ionic/storage-angular';
 
 /** Interface que representa o perfil do utilizador */
 export interface Utilizador {
@@ -11,17 +12,17 @@ export interface Utilizador {
 
 /**
  * Service para gestão do perfil do utilizador.
- * Guarda e carrega dados usando localStorage (substituível por Ionic Storage).
+ * Guarda e carrega dados usando Ionic Storage (req. 9).
  */
 @Injectable({
   providedIn: 'root'
 })
 export class UtilizadorService {
 
-  /** Chave usada para guardar o perfil no storage */
+  /** Chave usada para guardar o perfil no Ionic Storage */
   private readonly STORAGE_KEY = 'papelada_utilizador';
 
-  /** Perfil padrão para utilizador não autenticado */
+  /** Perfil padrão */
   private perfilPadrao: Utilizador = {
     nome: 'José Vieira',
     email: 'joseviera@email.com',
@@ -35,23 +36,29 @@ export class UtilizadorService {
   /** Observable público para subscrever o perfil */
   utilizador$ = this.utilizadorSubject.asObservable();
 
-  constructor() {
-    this.carregarPerfil();
+  /** Indica se o Storage já foi inicializado */
+  private storageReady = false;
+
+  constructor(private storage: Storage) {
+    this.inicializar();
   }
 
   /**
-   * Carrega o perfil do utilizador do localStorage.
+   * Inicializa o Ionic Storage e carrega o perfil guardado.
    */
-  carregarPerfil(): void {
-    const guardado = localStorage.getItem(this.STORAGE_KEY);
-    if (guardado) {
-      try {
-        const perfil: Utilizador = JSON.parse(guardado);
-        this.utilizadorSubject.next(perfil);
-      } catch (e) {
-        console.error('Erro ao carregar perfil:', e);
-        this.utilizadorSubject.next(this.perfilPadrao);
-      }
+  async inicializar() {
+    await this.storage.create();
+    this.storageReady = true;
+    await this.carregarPerfil();
+  }
+
+  /**
+   * Carrega o perfil do utilizador do Ionic Storage.
+   */
+  async carregarPerfil() {
+    const perfil = await this.storage.get(this.STORAGE_KEY);
+    if (perfil) {
+      this.utilizadorSubject.next(perfil);
     }
   }
 
@@ -63,21 +70,20 @@ export class UtilizadorService {
   }
 
   /**
-   * Atualiza o perfil do utilizador e guarda no localStorage.
-   * @param dados - Dados parciais a atualizar (nome e/ou email)
+   * Atualiza o perfil do utilizador e guarda no Ionic Storage.
+   * @param dados - Dados parciais a atualizar
    */
-  atualizarPerfil(dados: Partial<Utilizador>): void {
-    const perfilAtual = this.getPerfil();
-    const perfilAtualizado: Utilizador = { ...perfilAtual, ...dados };
-    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(perfilAtualizado));
+  async atualizarPerfil(dados: Partial<Utilizador>) {
+    const perfilAtualizado: Utilizador = { ...this.getPerfil(), ...dados };
+    await this.storage.set(this.STORAGE_KEY, perfilAtualizado);
     this.utilizadorSubject.next(perfilAtualizado);
   }
 
   /**
-   * Apaga o perfil do utilizador do localStorage e repõe o padrão.
+   * Apaga o perfil do utilizador do Ionic Storage e repõe o padrão.
    */
-  apagarConta(): void {
-    localStorage.removeItem(this.STORAGE_KEY);
+  async apagarConta() {
+    await this.storage.remove(this.STORAGE_KEY);
     this.utilizadorSubject.next(this.perfilPadrao);
   }
 }

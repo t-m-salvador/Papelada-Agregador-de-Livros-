@@ -5,130 +5,126 @@
     </ion-buttons>
     <ion-title>{{ livro?.titulo }}</ion-title>
     <ion-buttons slot="end">
-      <!-- Botão partilhar para Twitter/X -->
-      <ion-button (click)="partilhar()" @if="livro">
-        <ion-icon slot="icon-only" name="logo-twitter"></ion-icon>
-      </ion-button>
+      @if (livro) {
+        <ion-button (click)="partilhar()">
+          <ion-icon slot="icon-only" name="logo-twitter"></ion-icon>
+        </ion-button>
+      }
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content @if="livro">
+@if (livro) {
+  <ion-content>
 
-  <!-- Capa do livro -->
-  <div class="capa-container">
-    <ion-img
-      [src]="livro.capa"
-      onerror="this.src='assets/icon/favicon.png'"
-      class="capa-imagem">
-    </ion-img>
-  </div>
-
-  <!-- Título, género e autores -->
-  <div class="info-livro">
-    <h1>{{ livro.titulo }}</h1>
-    <ion-chip color="secondary" class="chip-genero">{{ livro.genero }}</ion-chip>
-    <p class="autores">{{ livro.autores }}</p>
-  </div>
-
-  <!-- Secção de Avaliação por Estrelas (Tarefa 1) -->
-  <div class="secao-avaliacao">
-    <div class="estrelas-container">
-      <ion-icon
-        @for="let e of [1,2,3,4,5]"
-        [name]="getIconeEstrela(e)"
-        [class.estrela-selecionada]="e <= (estrelaSelecionada || livro.minhaAvaliacao || 0)"
-        (click)="avaliar(e)"
-        class="estrela">
-      </ion-icon>
+    <!-- Capa -->
+    <div class="capa-container">
+      <ion-img [src]="livro.capa" onerror="this.src='assets/icon/favicon.png'" class="capa-imagem"></ion-img>
     </div>
-    <p class="media-avaliacao">
-      <strong>{{ livro.avaliacao }}</strong> / 5
-      <span class="num-avaliacoes">({{ livro.numAvaliacoes }} avaliações)</span>
-    </p>
-    <p class="avaliacao-confirmada" @if="avaliacaoConfirmada">
-      <ion-icon name="checkmark-circle" color="success"></ion-icon>
-      Avaliação guardada!
-    </p>
-  </div>
 
-  <!-- Secção Opiniões (Tarefa 3) -->
-  <div class="secao-header">
-    <h2>Opinião</h2>
-    <ion-icon name="arrow-forward-outline" (click)="verTodasOpinioes()"></ion-icon>
-    <ion-icon name="pencil-outline" (click)="escreverOpiniao()" class="icon-escrever"></ion-icon>
-  </div>
+    <!-- Título, género e autores -->
+    <div class="info-livro">
+      <h1>{{ livro.titulo }}</h1>
+      <ion-chip color="secondary" class="chip-genero">{{ livro.genero }}</ion-chip>
+      <p class="autores">{{ livro.autores }}</p>
+    </div>
 
-  <ion-list lines="none" class="lista-opinioes">
-    <ion-item-sliding @for"="let opiniao of livro.opinioes">
-      <ion-item class="item-opiniao" button detail="false" (click)="abrirOpiniao(opiniao)">
-        <ion-avatar slot="start" class="avatar-opiniao">
-          <ion-icon name="person-circle-outline" class="icon-avatar"></ion-icon>
-        </ion-avatar>
-        <ion-label>
-          <h3>{{ opiniao.utilizador }}</h3>
-          <p>{{ opiniao.texto | slice:0:50 }}...</p>
-        </ion-label>
-        <ion-icon name="ellipsis-vertical-outline" slot="end"></ion-icon>
-      </ion-item>
-    </ion-item-sliding>
+    <!-- Avaliação por Estrelas (Tarefa 1) -->
+    <div class="secao-avaliacao">
+      <div class="estrelas-container">
+        @for (e of [1,2,3,4,5]; track e) {
+          <ion-icon
+            [name]="getIconeEstrela(e)"
+            [class.estrela-selecionada]="e <= (estrelaSelecionada || livro.minhaAvaliacao || 0)"
+            (click)="avaliar(e)"
+            class="estrela">
+          </ion-icon>
+        }
+      </div>
+      <p class="media-avaliacao">
+        <strong>{{ livro.avaliacao }}</strong> / 5
+        <span class="num-avaliacoes">({{ livro.numAvaliacoes }} avaliações)</span>
+      </p>
+      @if (avaliacaoConfirmada) {
+        <p class="avaliacao-confirmada">
+          <ion-icon name="checkmark-circle" color="success"></ion-icon>
+          Avaliação guardada!
+        </p>
+      }
+    </div>
 
-    <ion-item @if="livro.opinioes.length === 0" class="item-sem-opinioes">
-      <ion-label class="ion-text-center">
-        <p>Ainda não há opiniões. Sê o primeiro!</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
-
-  <!-- Botão Sugerir Livro Similar (Tarefa 3) -->
-  <div class="btn-sugerir-container">
-    <ion-button expand="block" fill="outline" color="primary" (click)="abrirSugerirSimilar()">
-      <ion-icon name="git-compare-outline" slot="start"></ion-icon>
-      Sugerir Livro Similar
-    </ion-button>
-  </div>
-
-  <!-- Livros Similares -->
-  <div @if="livrosSimilares.length > 0">
+    <!-- Opiniões (Tarefa 3) -->
     <div class="secao-header">
-      <h2>Livros Similares</h2>
+      <h2>Opinião</h2>
+      <ion-icon name="arrow-forward-outline"></ion-icon>
+      <ion-icon name="pencil-outline" (click)="escreverOpiniao()" class="icon-escrever"></ion-icon>
     </div>
-    <ion-list lines="none">
-      <ion-item
-        @for="let similar of livrosSimilares"
-        button
-        detail="true"
-        (click)="abrirLivro(similar.id)">
-        <ion-avatar slot="start" class="avatar-similar">
-          <ion-img [src]="similar.capa" onerror="this.src='assets/icon/favicon.png'"></ion-img>
-        </ion-avatar>
-        <ion-label>
-          <h3>{{ similar.titulo }}</h3>
-          <p>{{ similar.autores }}</p>
-        </ion-label>
-      </ion-item>
+
+    <ion-list lines="none" class="lista-opinioes">
+      @for (opiniao of livro.opinioes; track opiniao.id) {
+        <ion-item class="item-opiniao" button detail="false">
+          <ion-avatar slot="start" class="avatar-opiniao">
+            <ion-icon name="person-circle-outline" class="icon-avatar"></ion-icon>
+          </ion-avatar>
+          <ion-label>
+            <h3>{{ opiniao.utilizador }}</h3>
+            <p>{{ opiniao.texto | slice:0:50 }}...</p>
+          </ion-label>
+          <ion-icon name="ellipsis-vertical-outline" slot="end"></ion-icon>
+        </ion-item>
+      } @empty {
+        <ion-item class="item-sem-opinioes">
+          <ion-label class="ion-text-center">
+            <p>Ainda não há opiniões. Sê o primeiro!</p>
+          </ion-label>
+        </ion-item>
+      }
     </ion-list>
-  </div>
 
-  <!-- Secção Imagens -->
-  <div class="secao-header">
-    <h2>Imagens</h2>
-    <ion-icon name="arrow-forward-outline"></ion-icon>
-  </div>
-  <div class="imagens-placeholder">
-    <ion-img
-      [src]="livro.capa"
-      onerror="this.src='assets/icon/favicon.png'"
-      class="imagem-item">
-    </ion-img>
-  </div>
+    <!-- Botão Sugerir Livro Similar (Tarefa 3) -->
+    <div class="btn-sugerir-container">
+      <ion-button expand="block" fill="outline" color="primary" (click)="abrirSugerirSimilar()">
+        <ion-icon name="git-compare-outline" slot="start"></ion-icon>
+        Sugerir Livro Similar
+      </ion-button>
+    </div>
 
-  <div style="height: 32px;"></div>
+    <!-- Livros Similares -->
+    @if (livrosSimilares.length > 0) {
+      <div class="secao-header">
+        <h2>Livros Similares</h2>
+      </div>
+      <ion-list lines="none">
+        @for (similar of livrosSimilares; track similar.id) {
+          <ion-item button detail="true" (click)="abrirLivro(similar.id)">
+            <ion-avatar slot="start" class="avatar-similar">
+              <ion-img [src]="similar.capa" onerror="this.src='assets/icon/favicon.png'"></ion-img>
+            </ion-avatar>
+            <ion-label>
+              <h3>{{ similar.titulo }}</h3>
+              <p>{{ similar.autores }}</p>
+            </ion-label>
+          </ion-item>
+        }
+      </ion-list>
+    }
 
-</ion-content>
+    <!-- Imagens -->
+    <div class="secao-header">
+      <h2>Imagens</h2>
+      <ion-icon name="arrow-forward-outline"></ion-icon>
+    </div>
+    <div class="imagens-placeholder">
+      <ion-img [src]="livro.capa" onerror="this.src='assets/icon/favicon.png'" class="imagem-item"></ion-img>
+    </div>
+
+    <div style="height: 32px;"></div>
+
+  </ion-content>
+}
 
 <!-- Modal: Escrever Opinião -->
-<ion-modal #modalOpiniao [isOpen]="mostrarModalOpiniao" (didDismiss)="mostrarModalOpiniao = false">
+<ion-modal [isOpen]="mostrarModalOpiniao" (didDismiss)="mostrarModalOpiniao = false">
   <ng-template>
     <ion-header>
       <ion-toolbar color="primary">
@@ -155,19 +151,16 @@
         class="textarea-opiniao">
       </ion-textarea>
       <div class="modal-botoes">
-        <ion-button fill="outline" color="primary" (click)="mostrarModalOpiniao = false">
-          Cancelar
-        </ion-button>
-        <ion-button color="primary" (click)="submeterOpiniao()">
-          Confirmar
-        </ion-button>
+        <ion-button fill="outline" color="primary" (click)="mostrarModalOpiniao = false">Cancelar</ion-button>
+        <ion-button color="primary" (click)="submeterOpiniao()">Confirmar</ion-button>
       </div>
     </ion-content>
   </ng-template>
 </ion-modal>
 
 <!-- Bottom Sheet: Sugerir Livro Similar -->
-<ion-modal #modalSimilar [isOpen]="mostrarModalSimilar"
+<ion-modal
+  [isOpen]="mostrarModalSimilar"
   (didDismiss)="mostrarModalSimilar = false"
   [breakpoints]="[0, 0.5, 0.9]"
   [initialBreakpoint]="0.5">
@@ -190,19 +183,17 @@
         debounce="300">
       </ion-searchbar>
       <ion-list>
-        <ion-item
-          @for="let l of resultadosSimilar"
-          button
-          detail="false"
-          (click)="confirmarSimilar(l.id)">
-          <ion-avatar slot="start">
-            <ion-img [src]="l.capa" onerror="this.src='assets/icon/favicon.png'"></ion-img>
-          </ion-avatar>
-          <ion-label>
-            <h3>{{ l.titulo }}</h3>
-            <p>{{ l.autores }}</p>
-          </ion-label>
-        </ion-item>
+        @for (l of resultadosSimilar; track l.id) {
+          <ion-item button detail="false" (click)="confirmarSimilar(l.id)">
+            <ion-avatar slot="start">
+              <ion-img [src]="l.capa" onerror="this.src='assets/icon/favicon.png'"></ion-img>
+            </ion-avatar>
+            <ion-label>
+              <h3>{{ l.titulo }}</h3>
+              <p>{{ l.autores }}</p>
+            </ion-label>
+          </ion-item>
+        }
       </ion-list>
     </ion-content>
   </ng-template>
