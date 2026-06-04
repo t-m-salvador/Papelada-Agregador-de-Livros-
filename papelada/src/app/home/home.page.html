@@ -79,4 +79,37 @@
 
   }
 
+  <!-- Modal: Opinião Completa -->
+  <ion-modal [isOpen]="mostrarModalOpiniao" (didDismiss)="mostrarModalOpiniao = false">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-title>Opinião</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="mostrarModalOpiniao = false">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        @if (opiniaoSelecionada) {
+          <div class="modal-opiniao-completa">
+            <div class="modal-utilizador">
+              <ion-avatar class="avatar-opiniao">
+                <ion-icon name="person-circle-outline" class="icon-avatar"></ion-icon>
+              </ion-avatar>
+              <div>
+                <strong>{{ opiniaoSelecionada.utilizador }}</strong>
+                <p class="modal-livro-ref">{{ opiniaoSelecionada.livroTitulo }}</p>
+              </div>
+            </div>
+            <p class="modal-data">{{ opiniaoSelecionada.data }}</p>
+            <p class="modal-texto">{{ opiniaoSelecionada.texto }}</p>
+          </div>
+        }
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
 </ion-content>

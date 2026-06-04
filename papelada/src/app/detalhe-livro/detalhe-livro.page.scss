@@ -208,3 +208,21 @@
 
   ion-button { flex: 1; margin: 0 4px; }
 }
+
+/* Modal de opinião completa */
+.modal-opiniao-completa {
+  padding: 8px 0;
+}
+
+.modal-data {
+  font-size: 0.75rem;
+  color: #999;
+  margin: 8px 0 12px;
+}
+
+.modal-texto {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--ion-text-color);
+  white-space: pre-wrap;
+}

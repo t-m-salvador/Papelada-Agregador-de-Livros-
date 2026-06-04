@@ -43,6 +43,12 @@ export class DetalheLivroPage implements OnInit {
   /** Nome do utilizador atual */
   nomeUtilizador: string = '';
 
+  /** Controla visibilidade do modal de opinião completa */
+  mostrarModalOpiniaoCompleta: boolean = false;
+
+  /** Opinião selecionada para ver no modal */
+  opiniaoSelecionada: Opiniao | null = null;
+
   /** Termo de pesquisa no bottom sheet */
   termoPesquisaSimilar: string = '';
 
@@ -193,11 +199,12 @@ export class DetalheLivroPage implements OnInit {
   }
 
   /**
-   * Abre o detalhe de uma opinião específica.
-   * @param opiniao - Opinião a abrir
+   * Abre o modal com o texto completo da opinião.
+   * @param opiniao - Opinião a exibir
    */
   abrirOpiniao(opiniao: Opiniao) {
-    // Já mostrado inline; pode expandir para modal futuramente
+    this.opiniaoSelecionada = opiniao;
+    this.mostrarModalOpiniaoCompleta = true;
   }
 
   /**

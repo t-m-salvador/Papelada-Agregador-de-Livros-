@@ -62,7 +62,7 @@
 
     <ion-list lines="none" class="lista-opinioes">
       @for (opiniao of livro.opinioes; track opiniao.id) {
-        <ion-item class="item-opiniao" button detail="false">
+        <ion-item class="item-opiniao" button detail="false" (click)="abrirOpiniao(opiniao)">
           <ion-avatar slot="start" class="avatar-opiniao">
             <ion-icon name="person-circle-outline" class="icon-avatar"></ion-icon>
           </ion-avatar>
@@ -154,6 +154,36 @@
         <ion-button fill="outline" color="primary" (click)="mostrarModalOpiniao = false">Cancelar</ion-button>
         <ion-button color="primary" (click)="submeterOpiniao()">Confirmar</ion-button>
       </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<!-- Modal: Opinião Completa -->
+<ion-modal [isOpen]="mostrarModalOpiniaoCompleta" (didDismiss)="mostrarModalOpiniaoCompleta = false">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>Opinião</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="mostrarModalOpiniaoCompleta = false">
+            <ion-icon name="close-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      @if (opiniaoSelecionada) {
+        <div class="modal-opiniao-completa">
+          <div class="modal-utilizador">
+            <ion-avatar class="avatar-opiniao">
+              <ion-icon name="person-circle-outline" class="icon-avatar"></ion-icon>
+            </ion-avatar>
+            <strong>{{ opiniaoSelecionada.utilizador }}</strong>
+          </div>
+          <p class="modal-data">{{ opiniaoSelecionada.data }}</p>
+          <p class="modal-texto">{{ opiniaoSelecionada.texto }}</p>
+        </div>
+      }
     </ion-content>
   </ng-template>
 </ion-modal>
