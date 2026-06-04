@@ -142,18 +142,28 @@ export class LivrosService {
    * @param livro - Livro a adicionar (sem ID)
    */
   async adicionarLivro(livro: Omit<Livro, 'id'>): Promise<Livro> {
-    const livros = this.getTodosLivros();
-    const novoId = livros.length > 0 ? Math.max(...livros.map((l: Livro) => l.id)) + 1 : 100;
-    const novoLivro: Livro = { ...livro, id: novoId };
+  // 1. Ir buscar a lista completa que está atualmente na memória (JSON + Extras antigos)
+  const listaCompletaAtual = this.getTodosLivros();
+  
+  // 2. Gerar o ID com base em tudo o que está no ecrã para não haver colisões
+  const novoId = listaCompletaAtual.length > 0 
+    ? Math.max(...listaCompletaAtual.map((l: Livro) => l.id)) + 1 
+    : 100;
+    
+  const novoLivro: Livro = { ...livro, id: novoId };
 
-    // Guardar apenas os livros adicionados pelo utilizador no Storage
-    const livrosExtra: Livro[] = (await this.storage.get(this.STORAGE_KEY_LIVROS)) || [];
-    livrosExtra.push(novoLivro);
-    await this.storage.set(this.STORAGE_KEY_LIVROS, livrosExtra);
+  // 3. Ir ao Storage buscar APENAS os extras, adicionar o novo e gravar de volta
+  const livrosExtra: Livro[] = (await this.storage.get(this.STORAGE_KEY_LIVROS)) || [];
+  livrosExtra.push(novoLivro);
+  await this.storage.set(this.STORAGE_KEY_LIVROS, livrosExtra);
 
-    this.livrosSubject.next([...livros, novoLivro]);
-    return novoLivro;
-  }
+
+  // Em vez de misturar arrays do Storage, injetamos APENAS o 'novoLivro' 
+  // no fim da lista que já estava na memória.
+  this.livrosSubject.next([...listaCompletaAtual, novoLivro]);
+  
+  return novoLivro;
+}
 
   /**
    * Adiciona uma opinião a um livro e atualiza o Storage.
