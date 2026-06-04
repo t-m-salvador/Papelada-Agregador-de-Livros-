@@ -3,26 +3,24 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
-  {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'tabs/home',
     pathMatch: 'full'
   },
   {
-    path: 'minhabiblioteca',
-    loadChildren: () => import('./minhabiblioteca/minhabiblioteca.module').then( m => m.MinhabibliotecaPageModule)
+    // Tabs é o layout principal com a tab bar
+    path: 'tabs',
+    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
-    path: 'adicionar-livro',
-    loadChildren: () => import('./adicionar-livro/adicionar-livro.module').then( m => m.AdicionarLivroPageModule)
+    // Detalhe de livro fora das tabs para navegação por parâmetro
+    path: 'detalhe-livro/:id',
+    loadChildren: () => import('./detalhe-livro/detalhe-livro.module').then(m => m.DetalheLivroPageModule)
   },
   {
-    path: 'meu-perfil',
-    loadChildren: () => import('./meu-perfil/meu-perfil.module').then( m => m.MeuPerfilPageModule)
-  },
+    path: 'editar-perfil',
+    loadChildren: () => import('./editar-perfil/editar-perfil.module').then(m => m.EditarPerfilPageModule)
+  }
 ];
 
 @NgModule({

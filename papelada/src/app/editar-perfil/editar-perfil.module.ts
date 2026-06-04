@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule, Routes } from '@angular/router';
-import { AdicionarLivroPage } from './adicionar-livro.page';
+import { EditarPerfilPage } from './editar-perfil.page';
 
 const routes: Routes = [
-  { path: '', component: AdicionarLivroPage }
+  { path: '', component: EditarPerfilPage }
 ];
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, IonicModule, RouterModule.forChild(routes)],
-  declarations: [AdicionarLivroPage]
+  declarations: [EditarPerfilPage]
 })
-export class AdicionarLivroPageModule {}
+export class EditarPerfilPageModule {}

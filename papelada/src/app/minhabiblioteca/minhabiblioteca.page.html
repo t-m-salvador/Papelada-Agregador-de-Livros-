@@ -1,13 +1,87 @@
-<ion-header [translucent]="true">
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button @if="filtroAtivo" (click)="limparFiltro()" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ filtroAtivo || 'Minha Biblioteca' }}</ion-title>
+    <ion-buttons slot="end">
+      <!-- Toggle entre grelha e lista -->
+      <ion-button (click)="toggleVista()">
+        <ion-icon slot="icon-only" [name]="vistaGrelha ? 'list-outline' : 'grid-outline'"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <!-- Filtros por género -->
+  <ion-toolbar color="primary">
+    <ion-segment [(ngModel)]="generoSelecionado" (ionChange)="filtrarPorGenero()" scrollable>
+      <ion-segment-button value="">
+        <ion-label>Todos</ion-label>
+      </ion-segment-button>
+      <ion-segment-button @for="let g of generos" [value]="g">
+        <ion-label>{{ g }}</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+  <!-- Ordenação -->
   <ion-toolbar>
-    <ion-title>minhabiblioteca</ion-title>
+    <ion-item lines="none" class="item-ordenacao">
+      <ion-icon name="swap-vertical-outline" slot="start" color="primary"></ion-icon>
+      <ion-select
+        [(ngModel)]="ordenacao"
+        (ionChange)="ordenarLivros()"
+        interface="action-sheet"
+        placeholder="Ordenar por...">
+        <ion-select-option value="titulo-asc">Ordem Alfabética (A→Z)</ion-select-option>
+        <ion-select-option value="titulo-desc">Ordem Alfabética (Z→A)</ion-select-option>
+        <ion-select-option value="avaliacao-desc">Melhor Avaliação</ion-select-option>
+      </ion-select>
+    </ion-item>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">minhabiblioteca</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+
+  <!-- Vista em grelha -->
+  <div @if="vistaGrelha" class="grelha-livros">
+    <div
+      @for="let livro of livrosFiltrados"
+      class="card-grelha"
+      (click)="abrirLivro(livro.id)">
+      <ion-img
+        [src]="livro.capa"
+        onerror="this.src='assets/icon/favicon.png'"
+        class="capa-grelha">
+      </ion-img>
+      <p class="titulo-grelha">{{ livro.titulo | slice:0:18 }}...</p>
+      <p class="autor-grelha">{{ livro.autores | slice:0:16 }}...</p>
+    </div>
+  </div>
+
+  <!-- Vista em lista -->
+  <ion-list @if="!vistaGrelha" lines="none">
+    <ion-item
+      @for="let livro of livrosFiltrados"
+      button
+      detail="true"
+      class="item-lista"
+      (click)="abrirLivro(livro.id)">
+      <ion-avatar slot="start" class="avatar-lista">
+        <ion-img [src]="livro.capa" onerror="this.src='assets/icon/favicon.png'"></ion-img>
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ livro.titulo }}</h2>
+        <p>{{ livro.autores }}</p>
+        <ion-badge color="secondary">{{ livro.avaliacao }} ★</ion-badge>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- Mensagem sem livros -->
+  <div @if="livrosFiltrados.length === 0" class="sem-livros">
+    <ion-icon name="book-outline"></ion-icon>
+    <p>Nenhum livro encontrado.</p>
+  </div>
+
 </ion-content>

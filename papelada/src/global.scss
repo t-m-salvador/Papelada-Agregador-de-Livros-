@@ -1,37 +1,91 @@
-/*
- * App Global CSS
- * ----------------------------------------------------------------------------
- * Put style rules here that you want to apply globally. These styles are for
- * the entire app and not just one component. Additionally, this file can be
- * used as an entry point to import other CSS/Sass files to be included in the
- * output CSS.
- * For more information on global stylesheets, visit the documentation:
- * https://ionicframework.com/docs/layout/global-stylesheets
- */
-
 /* Core CSS required for Ionic components to work properly */
 @import "@ionic/angular/css/core.css";
-
-/* Basic CSS for apps built with Ionic */
 @import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/structure.css";
 @import "@ionic/angular/css/typography.css";
 @import "@ionic/angular/css/display.css";
-
-/* Optional CSS utils that can be commented out */
 @import "@ionic/angular/css/padding.css";
 @import "@ionic/angular/css/float-elements.css";
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
- */
+/* === Papelada — Formatações Globais === */
 
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import "@ionic/angular/css/palettes/dark.system.css";
+/* Fundo geral da app */
+ion-content {
+  --background: #FAF6F0;
+}
+
+/* Toolbar */
+ion-toolbar {
+  --background: #8B4513;
+  --color: #ffffff;
+}
+
+/* Tab bar */
+ion-tab-bar {
+  --background: #FAF6F0;
+  --color: #8B4513;
+  --color-selected: #8B4513;
+  border-top: 1px solid #E8DDD0;
+}
+
+ion-tab-button {
+  --color: #B08070;
+  --color-selected: #8B4513;
+
+  ion-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+}
+
+/* Searchbar */
+ion-searchbar {
+  --background: rgba(255,255,255,0.25);
+  --color: #ffffff;
+  --placeholder-color: rgba(255,255,255,0.7);
+  --icon-color: #ffffff;
+  --clear-button-color: #ffffff;
+  --border-radius: 20px;
+  padding: 4px 8px;
+}
+
+/* Segmento de filtros */
+ion-segment {
+  --background: transparent;
+}
+
+ion-segment-button {
+  --color: rgba(255,255,255,0.8);
+  --color-checked: #ffffff;
+  --indicator-color: rgba(255,255,255,0.3);
+  font-size: 0.8rem;
+}
+
+/* Badges */
+ion-badge {
+  --background: #D4A96A;
+  --color: #2C1A0E;
+  font-weight: 700;
+}
+
+/* Botões primários */
+ion-button[color="primary"] {
+  --background: #8B4513;
+  --background-activated: #7a3d11;
+  --border-radius: 10px;
+  font-weight: 600;
+}
+
+/* Chips */
+ion-chip[color="secondary"] {
+  --background: transparent;
+  --color: #8B4513;
+}
+
+/* Back button */
+ion-back-button {
+  --color: #ffffff;
+}

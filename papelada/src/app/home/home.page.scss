@@ -1,27 +1,100 @@
-#container {
-  text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+:host {
+  --background: var(--ion-background-color, #FAF6F0);
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+.secao-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 16px 8px;
+
+  h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--ion-text-color);
+    margin: 0;
+  }
+
+  ion-icon {
+    font-size: 1.3rem;
+    color: var(--ion-color-primary);
+    cursor: pointer;
+  }
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+.slides-livros {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  padding: 0 16px 16px;
+  gap: 12px;
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar { display: none; } /* Chrome/Safari */
 }
 
-#container a {
-  text-decoration: none;
+.card-livro {
+  width: 140px;
+  text-align: left;
+  cursor: pointer;
+
+  .capa-livro {
+    width: 140px;
+    height: 190px;
+    object-fit: cover;
+    border-radius: 8px;
+    background: var(--papelada-card-bg, #F0E8DC);
+  }
+
+  .titulo-livro {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin: 6px 0 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .autor-livro {
+    font-size: 0.75rem;
+    color: #888;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.lista-opinioes {
+  padding: 0 8px;
+}
+
+.item-opiniao {
+  --background: var(--papelada-card-bg, #F0E8DC);
+  --border-radius: 10px;
+  margin-bottom: 8px;
+
+  h3 {
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  p {
+    font-size: 0.8rem;
+    color: #666;
+  }
+}
+
+.avatar-opiniao {
+  width: 44px;
+  height: 44px;
+  background: #D4A96A33;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-avatar {
+  font-size: 2rem;
+  color: var(--ion-color-primary);
 }

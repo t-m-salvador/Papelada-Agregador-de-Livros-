@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/meu-perfil" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Alterar Informações</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- Avatar -->
+  <div class="avatar-container">
+    <ion-icon name="person-circle-outline" class="avatar-icon"></ion-icon>
+  </div>
+
+  <!-- Formulário reativo -->
+  <form [formGroup]="perfilForm">
+
+    <ion-item class="campo-form">
+      <ion-label position="stacked">Nome:</ion-label>
+      <ion-input
+        formControlName="nome"
+        type="text"
+        placeholder="O teu nome">
+      </ion-input>
+    </ion-item>
+    <p class="erro-campo" @if="campoInvalido('nome')">
+      O nome é obrigatório.
+    </p>
+
+    <ion-item class="campo-form">
+      <ion-label position="stacked">Email:</ion-label>
+      <ion-input
+        formControlName="email"
+        type="email"
+        placeholder="O teu email">
+      </ion-input>
+    </ion-item>
+    <p class="erro-campo" @if="campoInvalido('email')">
+      Introduz um email válido.
+    </p>
+
+    <ion-button
+      expand="block"
+      color="primary"
+      class="btn-confirmar"
+      (click)="confirmar()"
+      [disabled]="perfilForm.invalid">
+      Confirmar
+    </ion-button>
+
+  </form>
+
+</ion-content>

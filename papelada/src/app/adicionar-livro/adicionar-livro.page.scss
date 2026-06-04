@@ -1,0 +1,104 @@
+:host {
+  --background: var(--ion-background-color, #FAF6F0);
+}
+
+.capa-upload {
+  width: 180px;
+  height: 240px;
+  margin: 20px auto 16px;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px dashed var(--ion-color-primary);
+}
+
+.capa-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.capa-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--papelada-card-bg, #F0E8DC);
+
+  .icon-camera {
+    font-size: 3rem;
+    color: var(--ion-color-primary);
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 0.8rem;
+    color: #888;
+    text-align: center;
+    padding: 0 12px;
+  }
+}
+
+.campo-form {
+  --background: var(--papelada-card-bg, #F0E8DC);
+  --border-radius: 20px;
+  --padding-start: 16px;
+  border-radius: 20px;
+  margin-bottom: 4px;
+
+  ion-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--ion-color-primary);
+  }
+}
+
+.erro-campo {
+  font-size: 0.75rem;
+  color: var(--ion-color-danger, red);
+  padding: 0 16px;
+  margin: 0 0 8px;
+}
+
+.btn-adicionar {
+  margin-top: 24px;
+  --border-radius: 12px;
+  font-weight: 700;
+}
+
+/* Ecrã de confirmação */
+.conteudo-confirmacao {
+  --background: var(--ion-background-color, #FAF6F0);
+}
+
+.confirmacao-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--ion-color-primary);
+    margin-top: 24px;
+  }
+}
+
+.circulo-confirmacao {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: var(--ion-color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-check {
+  font-size: 5rem;
+  color: #ffffff;
+}

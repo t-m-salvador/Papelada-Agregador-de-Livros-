@@ -1,0 +1,41 @@
+:host {
+  --background: var(--ion-background-color, #FAF6F0);
+}
+
+.avatar-container {
+  display: flex;
+  justify-content: center;
+  padding: 24px 0 16px;
+}
+
+.avatar-icon {
+  font-size: 7rem;
+  color: var(--ion-color-primary);
+}
+
+.campo-form {
+  --background: var(--papelada-card-bg, #F0E8DC);
+  --border-radius: 20px;
+  --padding-start: 16px;
+  border-radius: 20px;
+  margin-bottom: 4px;
+
+  ion-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--ion-color-primary);
+  }
+}
+
+.erro-campo {
+  font-size: 0.75rem;
+  color: var(--ion-color-danger, red);
+  padding: 0 16px;
+  margin: 0 0 10px;
+}
+
+.btn-confirmar {
+  margin-top: 32px;
+  --border-radius: 12px;
+  font-weight: 700;
+}

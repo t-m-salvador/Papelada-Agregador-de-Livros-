@@ -1,0 +1,74 @@
+:host {
+  --background: var(--ion-background-color, #FAF6F0);
+}
+
+.item-ordenacao {
+  --background: transparent;
+  --padding-start: 8px;
+  font-size: 0.9rem;
+}
+
+/* Grelha */
+.grelha-livros {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 12px 8px;
+  gap: 10px;
+}
+
+.card-grelha {
+  width: calc(50% - 5px);
+  cursor: pointer;
+  text-align: center;
+
+  .capa-grelha {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    background: var(--papelada-card-bg, #F0E8DC);
+  }
+
+  .titulo-grelha {
+    font-size: 0.82rem;
+    font-weight: 600;
+    margin: 6px 0 2px;
+  }
+
+  .autor-grelha {
+    font-size: 0.75rem;
+    color: #888;
+    margin: 0;
+  }
+}
+
+/* Lista */
+.item-lista {
+  --background: var(--papelada-card-bg, #F0E8DC);
+  --border-radius: 10px;
+  margin: 6px 8px;
+
+  h2 { font-size: 0.95rem; font-weight: 600; }
+  p  { font-size: 0.8rem; color: #888; }
+}
+
+.avatar-lista {
+  width: 52px;
+  height: 68px;
+  border-radius: 6px;
+
+  ion-img { width: 100%; height: 100%; object-fit: cover; }
+}
+
+/* Sem livros */
+.sem-livros {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 16px;
+  color: #aaa;
+
+  ion-icon { font-size: 3rem; margin-bottom: 12px; }
+  p { font-size: 0.9rem; }
+}

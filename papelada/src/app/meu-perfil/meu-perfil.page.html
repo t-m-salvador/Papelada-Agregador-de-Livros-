@@ -1,13 +1,53 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>meu-perfil</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Meu Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">meu-perfil</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+
+  <!-- Avatar e nome -->
+  <div class="perfil-topo">
+    <div class="avatar-container">
+      <ion-icon name="person-circle-outline" class="avatar-icon"></ion-icon>
+    </div>
+    <h2>{{ utilizador?.nome }}</h2>
+    <div class="divisor"></div>
+  </div>
+
+  <!-- Informações do perfil -->
+  <div class="info-container">
+    <p><strong>Membro desde:</strong> {{ utilizador?.membroDesde }}</p>
+    <p><strong>Email:</strong> {{ utilizador?.email }}</p>
+  </div>
+
+  <!-- Botões de ação -->
+  <div class="botoes-container">
+    <ion-button
+      expand="block"
+      fill="outline"
+      color="primary"
+      class="btn-perfil"
+      (click)="editarInformacoes()">
+      Alterar Informações
+    </ion-button>
+
+    <ion-button
+      expand="block"
+      fill="outline"
+      color="primary"
+      class="btn-perfil"
+      (click)="alterarAutenticacao()">
+      Alterar Informações de Autenticação
+    </ion-button>
+
+    <ion-button
+      expand="block"
+      color="danger"
+      class="btn-apagar"
+      (click)="confirmarApagar()">
+      Apagar Conta
+    </ion-button>
+  </div>
+
 </ion-content>

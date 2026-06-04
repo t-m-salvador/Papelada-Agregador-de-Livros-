@@ -12,6 +12,8 @@ $RECYCLE.BIN/
 *.log
 log.txt
 
+/android
+/node_modules/@capacitor
 
 /.sourcemaps
 /.versions
