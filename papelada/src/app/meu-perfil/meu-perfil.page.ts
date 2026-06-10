@@ -31,6 +31,13 @@ export class MeuPerfilPage implements OnInit {
   }
 
   /**
+   * Navega para a página de ajuda.
+   */
+  abrirAjuda() {
+    this.router.navigate(['/ajuda']);
+  }
+
+  /**
    * Navega para a página de edição de informações do perfil.
    */
   editarInformacoes() {

@@ -98,34 +98,3 @@
   font-size: 2rem;
   color: var(--ion-color-primary);
 }
-
-/* Modal de opinião completa */
-.modal-opiniao-completa {
-  padding: 8px 0;
-}
-
-.modal-utilizador {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 8px;
-}
-
-.modal-livro-ref {
-  font-size: 0.8rem;
-  color: #888;
-  margin: 2px 0 0;
-}
-
-.modal-data {
-  font-size: 0.75rem;
-  color: #999;
-  margin: 0 0 12px;
-}
-
-.modal-texto {
-  font-size: 0.95rem;
-  line-height: 1.5;
-  color: var(--ion-text-color);
-  white-space: pre-wrap;
-}

@@ -32,12 +32,6 @@ export class HomePage implements OnInit {
   /** Opiniões recentes de todos os livros */
   opinioesPaginadas: OpiniaoComLivro[] = [];
 
-  /** Controla visibilidade do modal de opinião completa */
-  mostrarModalOpiniao: boolean = false;
-
-  /** Opinião selecionada para ver no modal */
-  opiniaoSelecionada: OpiniaoComLivro | null = null;
-
   constructor(
     private livrosService: LivrosService,
     private router: Router
@@ -96,11 +90,10 @@ export class HomePage implements OnInit {
   }
 
   /**
-   * Abre o modal com a opinião completa.
-   * @param opiniao - Opinião a exibir
+   * Navega para o detalhe do livro da opinião clicada.
+   * @param opiniao - Opinião com referência ao livro
    */
   abrirOpiniao(opiniao: OpiniaoComLivro) {
-    this.opiniaoSelecionada = opiniao;
-    this.mostrarModalOpiniao = true;
+    this.router.navigate(['/detalhe-livro', opiniao.livroId]);
   }
 }

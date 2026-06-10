@@ -1,0 +1,133 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/meu-perfil" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Ajuda</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!-- Introdução -->
+  <div class="intro-container">
+    <ion-icon name="book-outline" class="intro-icon"></ion-icon>
+    <h2>Como usar o Papelada</h2>
+    <p>Consulta abaixo as instruções para cada funcionalidade da app.</p>
+  </div>
+
+  <!-- Acordeão de ajuda por tarefa -->
+  <ion-accordion-group>
+
+    <!-- Tarefa 1: Avaliar livro -->
+    <ion-accordion value="avaliar">
+      <ion-item slot="header" class="item-acordeao">
+        <ion-icon name="star-outline" slot="start" color="primary"></ion-icon>
+        <ion-label>
+          <h3>Avaliar um Livro</h3>
+          <p>Como dar estrelas a um livro</p>
+        </ion-label>
+      </ion-item>
+      <div slot="content" class="conteudo-acordeao">
+        @for (passo of passos.avaliar; track passo.num) {
+          <div class="passo">
+            <div class="num-passo">{{ passo.num }}</div>
+            <div class="texto-passo">
+              <strong>{{ passo.titulo }}</strong>
+              <p>{{ passo.descricao }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </ion-accordion>
+
+    <!-- Tarefa 2: Adicionar livro -->
+    <ion-accordion value="adicionar">
+      <ion-item slot="header" class="item-acordeao">
+        <ion-icon name="add-circle-outline" slot="start" color="primary"></ion-icon>
+        <ion-label>
+          <h3>Adicionar um Livro</h3>
+          <p>Como catalogar um novo livro</p>
+        </ion-label>
+      </ion-item>
+      <div slot="content" class="conteudo-acordeao">
+        @for (passo of passos.adicionar; track passo.num) {
+          <div class="passo">
+            <div class="num-passo">{{ passo.num }}</div>
+            <div class="texto-passo">
+              <strong>{{ passo.titulo }}</strong>
+              <p>{{ passo.descricao }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </ion-accordion>
+
+    <!-- Tarefa 3: Opinião e partilha -->
+    <ion-accordion value="opiniao">
+      <ion-item slot="header" class="item-acordeao">
+        <ion-icon name="chatbubble-outline" slot="start" color="primary"></ion-icon>
+        <ion-label>
+          <h3>Escrever Opinião e Partilhar</h3>
+          <p>Como criticar e sugerir livros similares</p>
+        </ion-label>
+      </ion-item>
+      <div slot="content" class="conteudo-acordeao">
+        @for (passo of passos.opiniao; track passo.num) {
+          <div class="passo">
+            <div class="num-passo">{{ passo.num }}</div>
+            <div class="texto-passo">
+              <strong>{{ passo.titulo }}</strong>
+              <p>{{ passo.descricao }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </ion-accordion>
+
+    <!-- Perfil -->
+    <ion-accordion value="perfil">
+      <ion-item slot="header" class="item-acordeao">
+        <ion-icon name="person-outline" slot="start" color="primary"></ion-icon>
+        <ion-label>
+          <h3>Gerir o Perfil</h3>
+          <p>Como editar as tuas informações</p>
+        </ion-label>
+      </ion-item>
+      <div slot="content" class="conteudo-acordeao">
+        @for (passo of passos.perfil; track passo.num) {
+          <div class="passo">
+            <div class="num-passo">{{ passo.num }}</div>
+            <div class="texto-passo">
+              <strong>{{ passo.titulo }}</strong>
+              <p>{{ passo.descricao }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </ion-accordion>
+
+    <!-- Pesquisa -->
+    <ion-accordion value="pesquisa">
+      <ion-item slot="header" class="item-acordeao">
+        <ion-icon name="search-outline" slot="start" color="primary"></ion-icon>
+        <ion-label>
+          <h3>Pesquisar Livros</h3>
+          <p>Como encontrar livros na app</p>
+        </ion-label>
+      </ion-item>
+      <div slot="content" class="conteudo-acordeao">
+        @for (passo of passos.pesquisa; track passo.num) {
+          <div class="passo">
+            <div class="num-passo">{{ passo.num }}</div>
+            <div class="texto-passo">
+              <strong>{{ passo.titulo }}</strong>
+              <p>{{ passo.descricao }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </ion-accordion>
+
+  </ion-accordion-group>
+</ion-content>

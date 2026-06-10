@@ -1,0 +1,131 @@
+:host {
+  --background: var(--ion-background-color, #FAF6F0);
+}
+
+/* Introdução */
+.intro-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 28px 16px 20px;
+  text-align: center;
+
+  .intro-icon {
+    font-size: 3.5rem;
+    color: var(--ion-color-primary);
+    margin-bottom: 12px;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0 0 6px;
+  }
+
+  p {
+    font-size: 0.88rem;
+    color: #888;
+    margin: 0;
+  }
+}
+
+/* Acordeão */
+ion-accordion-group {
+  padding: 0 8px;
+}
+
+.item-acordeao {
+  --background: var(--papelada-card-bg, #F0E8DC);
+  --border-radius: 10px;
+  margin-bottom: 6px;
+
+  h3 { font-weight: 600; font-size: 0.95rem; }
+  p  { font-size: 0.8rem; color: #888; }
+}
+
+.conteudo-acordeao {
+  background: #FAF6F0;
+  padding: 12px 16px 8px;
+}
+
+/* Passos */
+.passo {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.num-passo {
+  min-width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--ion-color-primary);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.texto-passo {
+  strong {
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 2px;
+  }
+  p {
+    font-size: 0.82rem;
+    color: #666;
+    margin: 0;
+    line-height: 1.4;
+  }
+}
+
+/* Secção de navegação */
+.secao-navegacao {
+  padding: 20px 16px 8px;
+
+  h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0 0 14px;
+    color: var(--ion-color-primary);
+  }
+}
+
+.tabs-explicacao {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.tab-item {
+  background: var(--papelada-card-bg, #F0E8DC);
+  border-radius: 10px;
+  padding: 12px;
+  text-align: center;
+
+  .tab-icone {
+    font-size: 1.8rem;
+    color: var(--ion-color-primary);
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  strong {
+    font-size: 0.82rem;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  p {
+    font-size: 0.75rem;
+    color: #888;
+    margin: 0;
+    line-height: 1.3;
+  }
+}
